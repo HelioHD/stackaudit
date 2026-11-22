@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/HelioHD/delfino-report/schema/finding.schema.json",
+  "title": "Finding",
+  "type": "object",
+  "required": ["schemaVersion", "id", "title", "status", "tool"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9]*-[0-9]{2,}$" },
+    "title": { "type": "string", "minLength": 3, "maxLength": 160 },
+    "status": { "enum": ["confirmed", "unconfirmed", "fixed"] },
+    "severity": { "enum": ["critical", "high", "medium", "low", "info"] },
+    "cvss": { "type": "string", "pattern": "^CVSS:4\\.0/" },
+    "cvss31": { "type": "string", "pattern": "^CVSS:3\\.1/" },
+    "severityOverrideReason": { "type": "string", "minLength": 10 },
+    "cwe": { "type": "string", "pattern": "^CWE-[0-9]+$" },
+    "owasp": { "type": "string", "pattern": "^A[0-9]{2}:20[0-9]{2}$" },
+    "affected": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "references": { "type": "array", "items": { "type": "string", "format": "uri" } },
+    "tool": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": ["string", "null"] }
+      }
+    },
+    "fingerprint": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "retest": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "date": { "type": "string", "format": "date" },
+        "result": { "enum": ["fixed", "partiallyFixed", "notFixed"] }
+      }
+    }
+  },
+  "anyOf": [{ "required": ["severity"] }, { "required": ["cvss"] }]
+}
