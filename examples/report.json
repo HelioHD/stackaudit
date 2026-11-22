@@ -1,0 +1,444 @@
+[
+  {
+    "schemaVersion": 1,
+    "id": "SA-01",
+    "title": "Supabase secret key (sb-secret, role=service_role) in client bundle",
+    "status": "confirmed",
+    "severity": "critical",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:f73446e1ea6b8adf7b82d36fef3dc73e79a68083a4b09261365adc8a6e450e08",
+    "affected": [
+      "https://demo-app.example/assets/app.js"
+    ],
+    "references": [
+      "https://supabase.com/docs/guides/api/api-keys"
+    ],
+    "cwe": "CWE-312",
+    "owasp": "A05:2021"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-02",
+    "title": "Supabase secret key (legacy-jwt, role=service_role) in client bundle",
+    "status": "confirmed",
+    "severity": "critical",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:bd9924ca4945884ed7eecb8c8f8343b00d809e806ad9729235e4e8aa8af0f7d7",
+    "affected": [
+      "https://demo-app.example/assets/app.js"
+    ],
+    "references": [
+      "https://supabase.com/docs/guides/api/api-keys"
+    ],
+    "cwe": "CWE-312",
+    "owasp": "A05:2021"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-03",
+    "title": "Environment file (.env) publicly readable",
+    "status": "confirmed",
+    "severity": "critical",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:19c3d1b1f1596cf83b33d210f9590285a603b89a1deaac2402fce58832126af5",
+    "affected": [
+      "https://demo-app.example/.env"
+    ],
+    "references": [
+      "https://owasp.org/www-community/vulnerabilities/Information_exposure_through_query_strings_in_url"
+    ],
+    "cwe": "CWE-538",
+    "owasp": "A05:2021"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-04",
+    "title": "AWS Access Key exposed in app.js",
+    "status": "confirmed",
+    "severity": "high",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:9807bbf150fcc0a0d25540e2f6fd6c913fa641608448b83e5d69dbc0aa923548",
+    "affected": [
+      "https://demo-app.example/assets/app.js"
+    ],
+    "references": [
+      "https://github.com/gitleaks/gitleaks"
+    ],
+    "cwe": "CWE-312",
+    "owasp": "A05:2021"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-05",
+    "title": "Stripe Access Token exposed in app.js",
+    "status": "confirmed",
+    "severity": "high",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:a4926782684b285ed18468042fe52bcfdc28ae1138e63cefdd940a8398097295",
+    "affected": [
+      "https://demo-app.example/assets/app.js"
+    ],
+    "references": [
+      "https://github.com/gitleaks/gitleaks"
+    ],
+    "cwe": "CWE-312",
+    "owasp": "A05:2021"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-06",
+    "title": "Exposed .git/config",
+    "status": "confirmed",
+    "severity": "high",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:29e4aa73d28af613e6d62f7d0bac40033ca9d78efe2cce96edd32200b1ff92a8",
+    "affected": [
+      "https://demo-app.example/.git/config"
+    ],
+    "references": [
+      "https://owasp.org/www-community/vulnerabilities/Information_exposure_through_query_strings_in_url"
+    ],
+    "cwe": "CWE-538",
+    "owasp": "A05:2021"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-07",
+    "title": "Exposed .git directory (HEAD reachable)",
+    "status": "confirmed",
+    "severity": "high",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:fe676038a734bc413c074a6cac2189a9ce0d82f65f1c84f8cb47f2cef5cf8a93",
+    "affected": [
+      "https://demo-app.example/.git/HEAD"
+    ],
+    "references": [
+      "https://owasp.org/www-community/vulnerabilities/Information_exposure_through_query_strings_in_url"
+    ],
+    "cwe": "CWE-538",
+    "owasp": "A05:2021"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-08",
+    "title": "Sensitive table \"users\" exposes 1452 rows to the anon key",
+    "status": "confirmed",
+    "severity": "high",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:7fbe9b5aa7b72c095d6edfc9588bb36c252c288eb5fc874df8fa66141c7abf14",
+    "affected": [
+      "https://abcdefghijklmnopqrst.supabase.co/rest/v1/users?select=*"
+    ],
+    "references": [
+      "https://supabase.com/docs/guides/database/postgres/row-level-security"
+    ],
+    "cwe": "CWE-284",
+    "owasp": "A01:2021"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-09",
+    "title": "JSON Web Token exposed in app.js",
+    "status": "confirmed",
+    "severity": "medium",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:460b4038805347ac96db6d5c359c0df176b3134d1d6bfb0001a866585f52b03c",
+    "affected": [
+      "https://demo-app.example/assets/app.js"
+    ],
+    "references": [
+      "https://github.com/gitleaks/gitleaks"
+    ],
+    "cwe": "CWE-312",
+    "owasp": "A05:2021"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-10",
+    "title": "JSON Web Token exposed in app.js",
+    "status": "confirmed",
+    "severity": "medium",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:fbcb01f0b65d9e02637891ec9f3d7f8adac5ae9fabc95ccad15d0e005daeb5e9",
+    "affected": [
+      "https://demo-app.example/assets/app.js"
+    ],
+    "references": [
+      "https://github.com/gitleaks/gitleaks"
+    ],
+    "cwe": "CWE-312",
+    "owasp": "A05:2021"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-11",
+    "title": "Missing Content-Security-Policy header",
+    "status": "confirmed",
+    "severity": "medium",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:dc2b48a1fb6ac8a0db18a4717831b291dd9c5096ad7c07d56bd14be164db53f6",
+    "affected": [
+      "https://demo-app.example/"
+    ],
+    "references": [
+      "https://owasp.org/www-project-secure-headers/"
+    ],
+    "cwe": "CWE-1021",
+    "owasp": "A05:2021"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-12",
+    "title": "Missing Strict-Transport-Security header",
+    "status": "confirmed",
+    "severity": "medium",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:b81c34cf0e64ab2eeb5d9d910aada9b91d8f1dd7154fe4ad5f1cd32313cf0326",
+    "affected": [
+      "https://demo-app.example/"
+    ],
+    "references": [
+      "https://owasp.org/www-project-secure-headers/"
+    ],
+    "cwe": "CWE-319",
+    "owasp": "A05:2021"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-13",
+    "title": "Clickjacking protection missing (no frame-ancestors / X-Frame-Options)",
+    "status": "confirmed",
+    "severity": "medium",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:68b39eff0eda26636fb8fdc297380d0cfead182d86935e1a67a4d9d26ccf7d9c",
+    "affected": [
+      "https://demo-app.example/"
+    ],
+    "references": [
+      "https://owasp.org/www-project-secure-headers/"
+    ],
+    "cwe": "CWE-1021",
+    "owasp": "A05:2021"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-14",
+    "title": "Storage bucket \"avatars\" is listable with the public key",
+    "status": "confirmed",
+    "severity": "medium",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:516942c915c111681b4ddee32e5ec30229cc5ca5d2ac89a121978e7b126e7099",
+    "affected": [
+      "https://abcdefghijklmnopqrst.supabase.co/storage/v1/object/list/avatars"
+    ],
+    "references": [
+      "https://supabase.com/docs/guides/storage/security/access-control"
+    ],
+    "cwe": "CWE-284",
+    "owasp": "A01:2021"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-15",
+    "title": "Public source map at app.js.map",
+    "status": "confirmed",
+    "severity": "low",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:d3873a5e6592ecfb37fec96999b2f21ec76f2d53f2cb878a2e7e1891232c469d",
+    "affected": [
+      "https://demo-app.example/assets/app.js.map"
+    ],
+    "references": [
+      "https://developer.mozilla.org/en-US/docs/Web/API/Document/currentScript"
+    ],
+    "cwe": "CWE-540"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-16",
+    "title": "Missing Referrer-Policy header",
+    "status": "confirmed",
+    "severity": "low",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:039c094535b4f0538b479a113c7fc2b7c6f400e90a43ab3a3cac122e44aed2c2",
+    "affected": [
+      "https://demo-app.example/"
+    ],
+    "references": [
+      "https://owasp.org/www-project-secure-headers/"
+    ],
+    "cwe": "CWE-200",
+    "owasp": "A05:2021"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-17",
+    "title": "Supabase email autoconfirm is on",
+    "status": "confirmed",
+    "severity": "low",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:f0eb5aa1ac005133b7c6547275cabe57b47accb9a87cd66e4e8b6c874159b8c6",
+    "affected": [
+      "https://abcdefghijklmnopqrst.supabase.co/auth/v1/settings"
+    ],
+    "references": [
+      "https://supabase.com/docs/guides/auth"
+    ],
+    "cwe": "CWE-287"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-18",
+    "title": "Platforms detected: vercel, supabase",
+    "status": "confirmed",
+    "severity": "info",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:5f4cb930bb25193773175301bee8df5d38d9f4813df2c8e81581761e735cede1"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-19",
+    "title": "Supabase sb-publishable (anon/publishable) key present in bundle",
+    "status": "confirmed",
+    "severity": "info",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:1b31d5a606669345adbe502797f376355944e870320bede804b24d9d9decb16a",
+    "affected": [
+      "https://demo-app.example/assets/app.js"
+    ],
+    "references": [
+      "https://supabase.com/docs/guides/api/api-keys"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-20",
+    "title": "Supabase legacy-jwt (anon/publishable) key present in bundle",
+    "status": "confirmed",
+    "severity": "info",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:533b6027d03d00c3a032ce7fa47de2c1d6c31fa24ce2f11cb550e641d8eb832a",
+    "affected": [
+      "https://demo-app.example/assets/app.js"
+    ],
+    "references": [
+      "https://supabase.com/docs/guides/api/api-keys"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-21",
+    "title": "Review: Table \"products\" exposes 320 rows to the anon key",
+    "status": "confirmed",
+    "severity": "info",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:7790e8ff09853c98c3fb1c463e88503ca50fe53d87273e0f15459c52fe7c8bdd",
+    "affected": [
+      "https://abcdefghijklmnopqrst.supabase.co/rest/v1/products?select=*"
+    ],
+    "references": [
+      "https://supabase.com/docs/guides/database/postgres/row-level-security"
+    ],
+    "cwe": "CWE-284",
+    "owasp": "A01:2021"
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-22",
+    "title": "Review: Supabase public signup is enabled",
+    "status": "confirmed",
+    "severity": "info",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:35168a3c20e6d15f86f3d3d1e45130c106f87a4721df7bd2282af567e6331713",
+    "affected": [
+      "https://abcdefghijklmnopqrst.supabase.co/auth/v1/settings"
+    ],
+    "references": [
+      "https://supabase.com/docs/guides/auth"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "SA-23",
+    "title": "Review: pg_graphql endpoint is reachable",
+    "status": "confirmed",
+    "severity": "info",
+    "tool": {
+      "name": "stackaudit",
+      "version": "0.1.0"
+    },
+    "fingerprint": "sha256:3c3cd2a3c85bb2331cf5493afdba9d12a90e12e60cf12e8b297422d036230291",
+    "affected": [
+      "https://abcdefghijklmnopqrst.supabase.co/graphql/v1"
+    ],
+    "references": [
+      "https://supabase.com/docs/guides/graphql"
+    ]
+  }
+]

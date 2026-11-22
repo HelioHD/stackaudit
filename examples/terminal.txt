@@ -1,0 +1,118 @@
+../ stackaudit  https://demo-app.example
+mode: active   platforms: vercel, supabase   requests: 14
+
+CRITICAL 3  HIGH 5  MEDIUM 6  LOW 3  INFO 6
+
+[CRITICAL] Supabase secret key (sb-secret, role=service_role) in client bundle
+    A secret-grade Supabase key (sb_sec...0000) was found in https://demo-app.example/assets/app.js. This key bypasses RLS and grants full database access.
+    affected: https://demo-app.example/assets/app.js
+    status: confirmed   check: supabase-key-in-bundle
+
+[CRITICAL] Supabase secret key (legacy-jwt, role=service_role) in client bundle
+    A secret-grade Supabase key (eyJhbG...0000) was found in https://demo-app.example/assets/app.js. This key bypasses RLS and grants full database access.
+    affected: https://demo-app.example/assets/app.js
+    status: confirmed   check: supabase-key-in-bundle
+
+[CRITICAL] Environment file (.env) publicly readable
+    https://demo-app.example/.env returned HTTP 200 with content matching a /.env signature.
+    affected: https://demo-app.example/.env
+    status: confirmed   check: exposed-dotfiles
+
+[HIGH] AWS Access Key exposed in app.js
+    gitleaks rule "aws-access-token" matched AKIAFA...0000 in https://demo-app.example/assets/app.js. The secret is reported, never validated against its provider.
+    affected: https://demo-app.example/assets/app.js
+    status: confirmed   check: secret-in-bundle
+
+[HIGH] Stripe Access Token exposed in app.js
+    gitleaks rule "stripe-access-token" matched sk_liv...E000 in https://demo-app.example/assets/app.js. The secret is reported, never validated against its provider.
+    affected: https://demo-app.example/assets/app.js
+    status: confirmed   check: secret-in-bundle
+
+[HIGH] Exposed .git/config
+    https://demo-app.example/.git/config returned HTTP 200 with content matching a /.git/config signature.
+    affected: https://demo-app.example/.git/config
+    status: confirmed   check: exposed-dotfiles
+
+[HIGH] Exposed .git directory (HEAD reachable)
+    https://demo-app.example/.git/HEAD returned HTTP 200 with content matching a /.git/HEAD signature.
+    affected: https://demo-app.example/.git/HEAD
+    status: confirmed   check: exposed-dotfiles
+
+[HIGH] Sensitive table "users" exposes 1452 rows to the anon key
+    HEAD + Prefer: count=exact on users returned Content-Range total 1452 using only the public key. No rows were downloaded. The table name suggests personal data. INSERT/UPDATE permissiveness is NOT tested (never written).
+    affected: https://abcdefghijklmnopqrst.supabase.co/rest/v1/users?select=*
+    status: confirmed   check: supabase-table-count
+
+[MEDIUM] JSON Web Token exposed in app.js
+    gitleaks rule "jwt" matched eyJhbG...0000 in https://demo-app.example/assets/app.js. The secret is reported, never validated against its provider.
+    affected: https://demo-app.example/assets/app.js
+    status: confirmed   check: secret-in-bundle
+
+[MEDIUM] JSON Web Token exposed in app.js
+    gitleaks rule "jwt" matched eyJhbG...0000 in https://demo-app.example/assets/app.js. The secret is reported, never validated against its provider.
+    affected: https://demo-app.example/assets/app.js
+    status: confirmed   check: secret-in-bundle
+
+[MEDIUM] Missing Content-Security-Policy header
+    The response for https://demo-app.example/ did not include the content-security-policy header.
+    affected: https://demo-app.example/
+    status: confirmed   check: security-headers
+
+[MEDIUM] Missing Strict-Transport-Security header
+    The response for https://demo-app.example/ did not include the strict-transport-security header.
+    affected: https://demo-app.example/
+    status: confirmed   check: security-headers
+
+[MEDIUM] Clickjacking protection missing (no frame-ancestors / X-Frame-Options)
+    Neither a CSP frame-ancestors directive nor X-Frame-Options was present on https://demo-app.example/.
+    affected: https://demo-app.example/
+    status: confirmed   check: security-headers
+
+[MEDIUM] Storage bucket "avatars" is listable with the public key
+    POST https://abcdefghijklmnopqrst.supabase.co/storage/v1/object/list/avatars (the Supabase list endpoint) returned object entries using only the public key. "Read-only" here includes this POST, which lists but never mutates.
+    affected: https://abcdefghijklmnopqrst.supabase.co/storage/v1/object/list/avatars
+    status: confirmed   check: supabase-storage-listable
+
+[LOW] Public source map at app.js.map
+    https://demo-app.example/assets/app.js.map returned HTTP 200 with a sources array, exposing original (pre-minification) source.
+    affected: https://demo-app.example/assets/app.js.map
+    status: confirmed   check: public-source-map
+
+[LOW] Missing Referrer-Policy header
+    The response for https://demo-app.example/ did not include the referrer-policy header.
+    affected: https://demo-app.example/
+    status: confirmed   check: security-headers
+
+[LOW] Supabase email autoconfirm is on
+    GET /auth/v1/settings reports mailer_autoconfirm=true; accounts are usable without verifying ownership of the email address.
+    affected: https://abcdefghijklmnopqrst.supabase.co/auth/v1/settings
+    status: confirmed   check: supabase-auth-settings
+
+[INFO] Platforms detected: vercel, supabase
+    stackaudit identified vercel, supabase from headers, host or bundle. Supabase project: https://abcdefghijklmnopqrst.supabase.co.
+    status: confirmed   check: platform-detect
+
+[INFO] Supabase sb-publishable (anon/publishable) key present in bundle
+    A publishable/anon Supabase key (sb_pub...E000) is present in https://demo-app.example/assets/app.js. This is expected by design; it is only safe when Row Level Security is enforced on every table.
+    affected: https://demo-app.example/assets/app.js
+    status: confirmed   check: supabase-key-in-bundle
+
+[INFO] Supabase legacy-jwt (anon/publishable) key present in bundle
+    A publishable/anon Supabase key (eyJhbG...0000) is present in https://demo-app.example/assets/app.js. This is expected by design; it is only safe when Row Level Security is enforced on every table.
+    affected: https://demo-app.example/assets/app.js
+    status: confirmed   check: supabase-key-in-bundle
+
+[REVIEW] Review: Table "products" exposes 320 rows to the anon key
+    HEAD + Prefer: count=exact on products returned Content-Range total 320 using only the public key. No rows were downloaded. Name does not suggest personal data (e.g. a public product catalog may be intentional); classify manually. INSERT/UPDATE permissiveness is NOT tested (never written).
+    affected: https://abcdefghijklmnopqrst.supabase.co/rest/v1/products?select=*
+    status: confirmed   check: supabase-table-count
+
+[REVIEW] Review: Supabase public signup is enabled
+    GET /auth/v1/settings reports disable_signup=false. Open signup may be intended; confirm with the owner.
+    affected: https://abcdefghijklmnopqrst.supabase.co/auth/v1/settings
+    status: confirmed   check: supabase-auth-settings
+
+[REVIEW] Review: pg_graphql endpoint is reachable
+    HEAD https://abcdefghijklmnopqrst.supabase.co/graphql/v1 returned HTTP 200. The GraphQL surface is exposed; it is governed by the same RLS as REST. Client calls these RPCs (verify none are SECURITY DEFINER with weak checks): promote_to_admin.
+    affected: https://abcdefghijklmnopqrst.supabase.co/graphql/v1
+    status: confirmed   check: supabase-pg-graphql

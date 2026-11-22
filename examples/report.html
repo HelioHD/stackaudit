@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>stackaudit report — https://demo-app.example</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root, [data-theme="light"] {
+  --bg:#f6f6f3; --surface:#ffffff; --ink:#111318; --ink-soft:#3b3f4a;
+  --muted:#6b707c; --line:#e3e4e8; --brand:#0057ff; --accent:#0057ff;
+  --brand-soft:#e8efff; --code-bg:#111318; --code-fg:#e9ecf5;
+  --sev-critical:#b5283b; --sev-high:#cc5a1e; --sev-medium:#c79a12;
+  --sev-low:#3b7a46; --sev-info:#8a93a1;
+  --radius-md:16px; --radius-lg:18px; --radius-pill:999px;
+  --font-display:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:#111318; --surface:#1a1d24; --ink:#e9ecf5; --ink-soft:#b8b9ba;
+    --muted:#8a90a2; --line:#292b2f; --accent:#8fb2ff; --brand-soft:#0d2452;
+    --sev-critical:#ff7a85; --sev-high:#f5b26b; --sev-medium:#e0b43a;
+    --sev-low:#5ee6a0; --sev-info:#8a93a1;
+  }
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--font-display); line-height:1.55; }
+.wrap { max-width:1120px; margin:0 auto; padding:48px 16px 88px; }
+.brand { font-family:var(--font-display); font-weight:600; font-size:28px;
+  letter-spacing:-0.03em; }
+.brand .slash { color:var(--brand); }
+.eyebrow { font-family:var(--font-mono); font-size:12px; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--muted); }
+h1 { font-family:var(--font-display); font-size:40px; letter-spacing:-0.035em;
+  margin:12px 0 4px; }
+.meta { font-family:var(--font-mono); font-size:13px; color:var(--muted);
+  margin-bottom:32px; }
+.summary { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:48px; }
+.stat-tile { background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--radius-lg); padding:16px 20px; min-width:110px;
+  display:flex; flex-direction:column; gap:4px; }
+.stat { font-family:var(--font-mono); font-size:26px; font-variant-numeric:tabular-nums; }
+.label { font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.12em;
+  color:var(--muted); }
+.stat-tile.sev-critical .stat { color:var(--sev-critical); }
+.stat-tile.sev-high .stat { color:var(--sev-high); }
+.stat-tile.sev-medium .stat { color:var(--sev-medium); }
+.stat-tile.sev-low .stat { color:var(--sev-low); }
+.stat-tile.sev-info .stat { color:var(--sev-info); }
+.finding { background:var(--surface); border:1px solid var(--line);
+  border-left-width:4px; border-radius:var(--radius-md); padding:20px 24px;
+  margin-bottom:16px; }
+.finding.sev-critical { border-left-color:var(--sev-critical); }
+.finding.sev-high { border-left-color:var(--sev-high); }
+.finding.sev-medium { border-left-color:var(--sev-medium); }
+.finding.sev-low { border-left-color:var(--sev-low); }
+.finding.sev-info { border-left-color:var(--sev-info); }
+.badge { font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em;
+  border-radius:var(--radius-pill); padding:2px 10px; border:1px solid var(--line);
+  color:var(--ink); }
+.finding h3 { font-family:var(--font-display); font-size:18px; margin:10px 0 8px;
+  letter-spacing:-0.01em; }
+.finding p { margin:6px 0; color:var(--ink-soft); font-size:15px; }
+.kv { font-family:var(--font-mono); font-size:12.5px; color:var(--muted);
+  word-break:break-all; }
+.remediation { background:var(--brand-soft); border-radius:12px; padding:10px 14px;
+  font-size:14px; color:var(--ink); margin-top:10px; }
+footer { margin-top:48px; font-family:var(--font-mono); font-size:12px;
+  color:var(--muted); border-top:1px solid var(--line); padding-top:16px; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="brand"><span class="slash">../</span> stackaudit</div>
+  <div class="eyebrow">MISCONFIGURATION REPORT</div>
+  <h1>https://demo-app.example</h1>
+  <div class="meta">mode: active · platforms: vercel, supabase · requests: 14 · version: 0.1.0</div>
+  <section class="summary"><div class="stat-tile sev-critical"><span class="stat">3</span><span class="label">CRITICAL</span></div><div class="stat-tile sev-high"><span class="stat">5</span><span class="label">HIGH</span></div><div class="stat-tile sev-medium"><span class="stat">6</span><span class="label">MEDIUM</span></div><div class="stat-tile sev-low"><span class="stat">3</span><span class="label">LOW</span></div><div class="stat-tile sev-info"><span class="stat">6</span><span class="label">INFO</span></div></section>
+  <section><article class="finding sev-critical">
+  <span class="badge">CRITICAL</span>
+  <h3>Supabase secret key (sb-secret, role=service_role) in client bundle</h3>
+  <p>A secret-grade Supabase key (sb_sec...0000) was found in https://demo-app.example/assets/app.js. This key bypasses RLS and grants full database access.</p>
+  <p class="kv">affected: https://demo-app.example/assets/app.js</p>
+  <p class="kv">status: confirmed · check: supabase-key-in-bundle · CWE-312</p>
+  <p class="kv">refs: <a href="https://supabase.com/docs/guides/api/api-keys">https://supabase.com/docs/guides/api/api-keys</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Never ship the service_role / sb_secret_ key to the browser. Keep it server-side only; rotate any key found in a bundle.</div>
+</article>
+<article class="finding sev-critical">
+  <span class="badge">CRITICAL</span>
+  <h3>Supabase secret key (legacy-jwt, role=service_role) in client bundle</h3>
+  <p>A secret-grade Supabase key (eyJhbG...0000) was found in https://demo-app.example/assets/app.js. This key bypasses RLS and grants full database access.</p>
+  <p class="kv">affected: https://demo-app.example/assets/app.js</p>
+  <p class="kv">status: confirmed · check: supabase-key-in-bundle · CWE-312</p>
+  <p class="kv">refs: <a href="https://supabase.com/docs/guides/api/api-keys">https://supabase.com/docs/guides/api/api-keys</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Never ship the service_role / sb_secret_ key to the browser. Keep it server-side only; rotate any key found in a bundle.</div>
+</article>
+<article class="finding sev-critical">
+  <span class="badge">CRITICAL</span>
+  <h3>Environment file (.env) publicly readable</h3>
+  <p>https://demo-app.example/.env returned HTTP 200 with content matching a /.env signature.</p>
+  <p class="kv">affected: https://demo-app.example/.env</p>
+  <p class="kv">status: confirmed · check: exposed-dotfiles · CWE-538</p>
+  <p class="kv">refs: <a href="https://owasp.org/www-community/vulnerabilities/Information_exposure_through_query_strings_in_url">https://owasp.org/www-community/vulnerabilities/Information_exposure_through_query_strings_in_url</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Block access to dotfiles at the server/proxy; never deploy .env or .git to the served root.</div>
+</article>
+<article class="finding sev-high">
+  <span class="badge">HIGH</span>
+  <h3>AWS Access Key exposed in app.js</h3>
+  <p>gitleaks rule &quot;aws-access-token&quot; matched AKIAFA...0000 in https://demo-app.example/assets/app.js. The secret is reported, never validated against its provider.</p>
+  <p class="kv">affected: https://demo-app.example/assets/app.js</p>
+  <p class="kv">status: confirmed · check: secret-in-bundle · CWE-312</p>
+  <p class="kv">refs: <a href="https://github.com/gitleaks/gitleaks">https://github.com/gitleaks/gitleaks</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Move the credential to a server-side environment variable; never expose non-public secrets to client code. Rotate the leaked value.</div>
+</article>
+<article class="finding sev-high">
+  <span class="badge">HIGH</span>
+  <h3>Stripe Access Token exposed in app.js</h3>
+  <p>gitleaks rule &quot;stripe-access-token&quot; matched sk_liv...E000 in https://demo-app.example/assets/app.js. The secret is reported, never validated against its provider.</p>
+  <p class="kv">affected: https://demo-app.example/assets/app.js</p>
+  <p class="kv">status: confirmed · check: secret-in-bundle · CWE-312</p>
+  <p class="kv">refs: <a href="https://github.com/gitleaks/gitleaks">https://github.com/gitleaks/gitleaks</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Move the credential to a server-side environment variable; never expose non-public secrets to client code. Rotate the leaked value.</div>
+</article>
+<article class="finding sev-high">
+  <span class="badge">HIGH</span>
+  <h3>Exposed .git/config</h3>
+  <p>https://demo-app.example/.git/config returned HTTP 200 with content matching a /.git/config signature.</p>
+  <p class="kv">affected: https://demo-app.example/.git/config</p>
+  <p class="kv">status: confirmed · check: exposed-dotfiles · CWE-538</p>
+  <p class="kv">refs: <a href="https://owasp.org/www-community/vulnerabilities/Information_exposure_through_query_strings_in_url">https://owasp.org/www-community/vulnerabilities/Information_exposure_through_query_strings_in_url</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Block access to dotfiles at the server/proxy; never deploy .env or .git to the served root.</div>
+</article>
+<article class="finding sev-high">
+  <span class="badge">HIGH</span>
+  <h3>Exposed .git directory (HEAD reachable)</h3>
+  <p>https://demo-app.example/.git/HEAD returned HTTP 200 with content matching a /.git/HEAD signature.</p>
+  <p class="kv">affected: https://demo-app.example/.git/HEAD</p>
+  <p class="kv">status: confirmed · check: exposed-dotfiles · CWE-538</p>
+  <p class="kv">refs: <a href="https://owasp.org/www-community/vulnerabilities/Information_exposure_through_query_strings_in_url">https://owasp.org/www-community/vulnerabilities/Information_exposure_through_query_strings_in_url</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Block access to dotfiles at the server/proxy; never deploy .env or .git to the served root.</div>
+</article>
+<article class="finding sev-high">
+  <span class="badge">HIGH</span>
+  <h3>Sensitive table &quot;users&quot; exposes 1452 rows to the anon key</h3>
+  <p>HEAD + Prefer: count=exact on users returned Content-Range total 1452 using only the public key. No rows were downloaded. The table name suggests personal data. INSERT/UPDATE permissiveness is NOT tested (never written).</p>
+  <p class="kv">affected: https://abcdefghijklmnopqrst.supabase.co/rest/v1/users?select=*</p>
+  <p class="kv">status: confirmed · check: supabase-table-count · CWE-284</p>
+  <p class="kv">refs: <a href="https://supabase.com/docs/guides/database/postgres/row-level-security">https://supabase.com/docs/guides/database/postgres/row-level-security</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Enable Row Level Security on the table and add policies that scope rows to the authenticated user.</div>
+</article>
+<article class="finding sev-medium">
+  <span class="badge">MEDIUM</span>
+  <h3>JSON Web Token exposed in app.js</h3>
+  <p>gitleaks rule &quot;jwt&quot; matched eyJhbG...0000 in https://demo-app.example/assets/app.js. The secret is reported, never validated against its provider.</p>
+  <p class="kv">affected: https://demo-app.example/assets/app.js</p>
+  <p class="kv">status: confirmed · check: secret-in-bundle · CWE-312</p>
+  <p class="kv">refs: <a href="https://github.com/gitleaks/gitleaks">https://github.com/gitleaks/gitleaks</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Move the credential to a server-side environment variable; never expose non-public secrets to client code. Rotate the leaked value.</div>
+</article>
+<article class="finding sev-medium">
+  <span class="badge">MEDIUM</span>
+  <h3>JSON Web Token exposed in app.js</h3>
+  <p>gitleaks rule &quot;jwt&quot; matched eyJhbG...0000 in https://demo-app.example/assets/app.js. The secret is reported, never validated against its provider.</p>
+  <p class="kv">affected: https://demo-app.example/assets/app.js</p>
+  <p class="kv">status: confirmed · check: secret-in-bundle · CWE-312</p>
+  <p class="kv">refs: <a href="https://github.com/gitleaks/gitleaks">https://github.com/gitleaks/gitleaks</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Move the credential to a server-side environment variable; never expose non-public secrets to client code. Rotate the leaked value.</div>
+</article>
+<article class="finding sev-medium">
+  <span class="badge">MEDIUM</span>
+  <h3>Missing Content-Security-Policy header</h3>
+  <p>The response for https://demo-app.example/ did not include the content-security-policy header.</p>
+  <p class="kv">affected: https://demo-app.example/</p>
+  <p class="kv">status: confirmed · check: security-headers · CWE-1021</p>
+  <p class="kv">refs: <a href="https://owasp.org/www-project-secure-headers/">https://owasp.org/www-project-secure-headers/</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Add the missing headers at the edge (Vercel headers config) or in the framework response.</div>
+</article>
+<article class="finding sev-medium">
+  <span class="badge">MEDIUM</span>
+  <h3>Missing Strict-Transport-Security header</h3>
+  <p>The response for https://demo-app.example/ did not include the strict-transport-security header.</p>
+  <p class="kv">affected: https://demo-app.example/</p>
+  <p class="kv">status: confirmed · check: security-headers · CWE-319</p>
+  <p class="kv">refs: <a href="https://owasp.org/www-project-secure-headers/">https://owasp.org/www-project-secure-headers/</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Add the missing headers at the edge (Vercel headers config) or in the framework response.</div>
+</article>
+<article class="finding sev-medium">
+  <span class="badge">MEDIUM</span>
+  <h3>Clickjacking protection missing (no frame-ancestors / X-Frame-Options)</h3>
+  <p>Neither a CSP frame-ancestors directive nor X-Frame-Options was present on https://demo-app.example/.</p>
+  <p class="kv">affected: https://demo-app.example/</p>
+  <p class="kv">status: confirmed · check: security-headers · CWE-1021</p>
+  <p class="kv">refs: <a href="https://owasp.org/www-project-secure-headers/">https://owasp.org/www-project-secure-headers/</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Add the missing headers at the edge (Vercel headers config) or in the framework response.</div>
+</article>
+<article class="finding sev-medium">
+  <span class="badge">MEDIUM</span>
+  <h3>Storage bucket &quot;avatars&quot; is listable with the public key</h3>
+  <p>POST https://abcdefghijklmnopqrst.supabase.co/storage/v1/object/list/avatars (the Supabase list endpoint) returned object entries using only the public key. &quot;Read-only&quot; here includes this POST, which lists but never mutates.</p>
+  <p class="kv">affected: https://abcdefghijklmnopqrst.supabase.co/storage/v1/object/list/avatars</p>
+  <p class="kv">status: confirmed · check: supabase-storage-listable · CWE-284</p>
+  <p class="kv">refs: <a href="https://supabase.com/docs/guides/storage/security/access-control">https://supabase.com/docs/guides/storage/security/access-control</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Add storage RLS policies; do not allow anonymous listing of private buckets.</div>
+</article>
+<article class="finding sev-low">
+  <span class="badge">LOW</span>
+  <h3>Public source map at app.js.map</h3>
+  <p>https://demo-app.example/assets/app.js.map returned HTTP 200 with a sources array, exposing original (pre-minification) source.</p>
+  <p class="kv">affected: https://demo-app.example/assets/app.js.map</p>
+  <p class="kv">status: confirmed · check: public-source-map · CWE-540</p>
+  <p class="kv">refs: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/currentScript">https://developer.mozilla.org/en-US/docs/Web/API/Document/currentScript</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Disable source map emission in production builds, or restrict access to .map files.</div>
+</article>
+<article class="finding sev-low">
+  <span class="badge">LOW</span>
+  <h3>Missing Referrer-Policy header</h3>
+  <p>The response for https://demo-app.example/ did not include the referrer-policy header.</p>
+  <p class="kv">affected: https://demo-app.example/</p>
+  <p class="kv">status: confirmed · check: security-headers · CWE-200</p>
+  <p class="kv">refs: <a href="https://owasp.org/www-project-secure-headers/">https://owasp.org/www-project-secure-headers/</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Add the missing headers at the edge (Vercel headers config) or in the framework response.</div>
+</article>
+<article class="finding sev-low">
+  <span class="badge">LOW</span>
+  <h3>Supabase email autoconfirm is on</h3>
+  <p>GET /auth/v1/settings reports mailer_autoconfirm=true; accounts are usable without verifying ownership of the email address.</p>
+  <p class="kv">affected: https://abcdefghijklmnopqrst.supabase.co/auth/v1/settings</p>
+  <p class="kv">status: confirmed · check: supabase-auth-settings · CWE-287</p>
+  <p class="kv">refs: <a href="https://supabase.com/docs/guides/auth">https://supabase.com/docs/guides/auth</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Review open signup / autoconfirm; disable self-signup if the app is not meant to accept public registrations.</div>
+</article>
+<article class="finding sev-info">
+  <span class="badge">INFO</span>
+  <h3>Platforms detected: vercel, supabase</h3>
+  <p>stackaudit identified vercel, supabase from headers, host or bundle. Supabase project: https://abcdefghijklmnopqrst.supabase.co.</p>
+  
+  <p class="kv">status: confirmed · check: platform-detect</p>
+  
+  
+</article>
+<article class="finding sev-info">
+  <span class="badge">INFO</span>
+  <h3>Supabase sb-publishable (anon/publishable) key present in bundle</h3>
+  <p>A publishable/anon Supabase key (sb_pub...E000) is present in https://demo-app.example/assets/app.js. This is expected by design; it is only safe when Row Level Security is enforced on every table.</p>
+  <p class="kv">affected: https://demo-app.example/assets/app.js</p>
+  <p class="kv">status: confirmed · check: supabase-key-in-bundle</p>
+  <p class="kv">refs: <a href="https://supabase.com/docs/guides/api/api-keys">https://supabase.com/docs/guides/api/api-keys</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Never ship the service_role / sb_secret_ key to the browser. Keep it server-side only; rotate any key found in a bundle.</div>
+</article>
+<article class="finding sev-info">
+  <span class="badge">INFO</span>
+  <h3>Supabase legacy-jwt (anon/publishable) key present in bundle</h3>
+  <p>A publishable/anon Supabase key (eyJhbG...0000) is present in https://demo-app.example/assets/app.js. This is expected by design; it is only safe when Row Level Security is enforced on every table.</p>
+  <p class="kv">affected: https://demo-app.example/assets/app.js</p>
+  <p class="kv">status: confirmed · check: supabase-key-in-bundle</p>
+  <p class="kv">refs: <a href="https://supabase.com/docs/guides/api/api-keys">https://supabase.com/docs/guides/api/api-keys</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Never ship the service_role / sb_secret_ key to the browser. Keep it server-side only; rotate any key found in a bundle.</div>
+</article>
+<article class="finding sev-info">
+  <span class="badge">REVIEW</span>
+  <h3>Review: Table &quot;products&quot; exposes 320 rows to the anon key</h3>
+  <p>HEAD + Prefer: count=exact on products returned Content-Range total 320 using only the public key. No rows were downloaded. Name does not suggest personal data (e.g. a public product catalog may be intentional); classify manually. INSERT/UPDATE permissiveness is NOT tested (never written).</p>
+  <p class="kv">affected: https://abcdefghijklmnopqrst.supabase.co/rest/v1/products?select=*</p>
+  <p class="kv">status: confirmed · check: supabase-table-count · CWE-284</p>
+  <p class="kv">refs: <a href="https://supabase.com/docs/guides/database/postgres/row-level-security">https://supabase.com/docs/guides/database/postgres/row-level-security</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Enable Row Level Security on the table and add policies that scope rows to the authenticated user.</div>
+</article>
+<article class="finding sev-info">
+  <span class="badge">REVIEW</span>
+  <h3>Review: Supabase public signup is enabled</h3>
+  <p>GET /auth/v1/settings reports disable_signup=false. Open signup may be intended; confirm with the owner.</p>
+  <p class="kv">affected: https://abcdefghijklmnopqrst.supabase.co/auth/v1/settings</p>
+  <p class="kv">status: confirmed · check: supabase-auth-settings</p>
+  <p class="kv">refs: <a href="https://supabase.com/docs/guides/auth">https://supabase.com/docs/guides/auth</a></p>
+  <div class="remediation"><strong>Remediation:</strong> Review open signup / autoconfirm; disable self-signup if the app is not meant to accept public registrations.</div>
+</article>
+<article class="finding sev-info">
+  <span class="badge">REVIEW</span>
+  <h3>Review: pg_graphql endpoint is reachable</h3>
+  <p>HEAD https://abcdefghijklmnopqrst.supabase.co/graphql/v1 returned HTTP 200. The GraphQL surface is exposed; it is governed by the same RLS as REST. Client calls these RPCs (verify none are SECURITY DEFINER with weak checks): promote_to_admin.</p>
+  <p class="kv">affected: https://abcdefghijklmnopqrst.supabase.co/graphql/v1</p>
+  <p class="kv">status: confirmed · check: supabase-pg-graphql</p>
+  <p class="kv">refs: <a href="https://supabase.com/docs/guides/graphql">https://supabase.com/docs/guides/graphql</a></p>
+  <div class="remediation"><strong>Remediation:</strong> If GraphQL is not used, disable pg_graphql; otherwise ensure RLS covers every type it can resolve.</div>
+</article></section>
+  <footer>Generated by stackaudit. Findings default to status "unconfirmed"; verify before reporting. Secrets are reported, never validated against their provider.</footer>
+</main>
+</body>
+</html>
