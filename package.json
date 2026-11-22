@@ -1,0 +1,52 @@
+{
+  "name": "stackaudit",
+  "version": "0.1.0",
+  "description": "Passive-first misconfiguration auditor for apps on Supabase + Vercel + Render. Emits pentest-ready findings.",
+  "type": "module",
+  "bin": {
+    "stackaudit": "dist/cli.js"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "schema",
+    "data",
+    "README.md",
+    "README-pt-BR.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/cli.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "keywords": [
+    "supabase",
+    "vercel",
+    "render",
+    "security",
+    "misconfiguration",
+    "pentest",
+    "appsec",
+    "sarif"
+  ],
+  "author": "Hélio Delfino",
+  "license": "MIT",
+  "dependencies": {
+    "ajv": "8.17.1",
+    "ajv-formats": "3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.2",
+    "tsx": "4.19.2",
+    "typescript": "5.7.2",
+    "vitest": "2.1.8"
+  }
+}
